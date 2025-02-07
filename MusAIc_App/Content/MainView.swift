@@ -11,17 +11,17 @@ struct MainView: View {
     var body: some View {
         TabView {
             AudioInputView()
-            .tabItem {
-                Label("Detect", systemImage: "waveform")
-            }
-                    
+                .tabItem {
+                    Label("Detect", systemImage: "waveform")
+                }
+            
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle")
-            }
+                }
         }
-        .tint(Color.white) // This makes the label and icon white
-                .background(Color.black.ignoresSafeArea())
+        .tint(.white) // Adjust for visibility
+        .background(Color.black.ignoresSafeArea())
     }
 }
 
@@ -63,7 +63,14 @@ struct ProfileView: View {
                 LinearGradient(gradient: Gradient(colors: [Color.white, Color.pink]), startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
                 VStack {
-                    Text("User Profile")
+                    Image("carmine-head")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .foregroundColor(.pink)
+                        .padding(.top, 40)
+                        
+                    Text("Carmine Anderson - Falconi")
                         .foregroundColor(.white)
                         .font(.title)
                         .padding()
@@ -71,7 +78,17 @@ struct ProfileView: View {
                     Spacer()
                 }
             }
-            .navigationTitle("Profile")
+            .navigationTitle("Your Profile")
+            .toolbar {
+                ToolbarItem() { // Places it in the right corner
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gearshape.fill")
+                            .resizable()
+                            .foregroundColor(.black)
+                            .frame(width: 30, height: 30)
+                    }
+                }
+            }
 //            .toolbar {
 //                ToolbarItem(placement: .principal) {
 //                    Text("Profile")
@@ -82,6 +99,13 @@ struct ProfileView: View {
         }
     }
 }
+
+struct SettingsView: View {
+    var body: some View {
+        Text("SettingsView")
+    }
+}
+
 #Preview {
     MainView()
 }
